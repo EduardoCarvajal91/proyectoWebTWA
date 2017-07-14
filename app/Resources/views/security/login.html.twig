@@ -8,15 +8,18 @@
 {% endif %}
 
 <form action="{{ path('login') }}" method="post">
-    <label for="username">Username:</label>
+    <label for="username">RUT:</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
-    <label for="password">Password:</label>
+    <label for="password">Contraseña:</label>
     <input type="password" id="password" name="_password" />
 
     <input type="hidden" name="_target_path" value="/" />
 
-
     <button type="submit">login</button>
 </form>
+
+    <form method="get" action="/register">
+        <input class="btn btn-primary" type="submit" value="Crear cuenta"/>
+    </form>
 {% endblock %}
