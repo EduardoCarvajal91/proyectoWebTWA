@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {# app/Resources/views/registration/register.html.twig #}
-{% block body %}
-{{ form_start(form) }}
-    {{ form_row(form.rut) }}
-    {{ form_row(form.nombre) }}
-    {{ form_row(form.paterno) }}
-    {{ form_row(form.materno) }}
-    {{ form_row(form.fechaNacimiento) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
 
-<button type="submit">Registrar</button>
-{{ form_end(form) }}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <br/>
+                <button class="btn btn-primary" type="submit">Registrar</button>
+            {{ form_end(form) }}
+        </div>
+</div>
 {% endblock %}
