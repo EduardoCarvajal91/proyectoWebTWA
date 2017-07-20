@@ -13,15 +13,14 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
         {{ form_start(form) }}
-            {{ form_row(form._rut) }}
-            {{ form_row(form._password) }}
+            {{ form_widget(form) }}
             <br/>
             <button class="btn btn-primary" type="submit">Log in</button>
         {{ form_end(form) }}
         </br>
-            <form method="get" action="/register">
-                <input class="btn btn-primary" type="submit" value="Crear cuenta"/>
-            </form>
+        <form method="get" action="/register">
+            <input class="btn btn-primary" type="submit" value="Crear cuenta"/>
+        </form>
         </div>
     </div>
 {% endblock %}
