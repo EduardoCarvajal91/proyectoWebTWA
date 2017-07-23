@@ -9,7 +9,7 @@
 // src/AppBundle/Controller/RegistrationController.php
 namespace AppBundle\Controller;
 
-use AppBundle\Form\PersonaType;
+use AppBundle\Form\RegisterForm;
 use AppBundle\Entity\Persona;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +25,7 @@ class RegistrationController extends Controller
     {
         // 1) build the form
         $persona = new Persona();
-        $form = $this->createForm(PersonaType::class, $persona);
+        $form = $this->createForm(RegisterForm::class, $persona);
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
