@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Persona
@@ -17,6 +18,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Persona implements UserInterface
 {
+    /**
+     * One Persona has Many PersonaProyecto.
+     * @ORM\OneToMany(targetEntity="PersonaProyecto", mappedBy="persona")
+     */
+    private $personaProyectos;
+
+    public function __construct() {
+        $this->personaProyectos = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
