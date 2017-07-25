@@ -25,8 +25,13 @@ security:
                 username_parameter: _rut
             provider: our_db_provider
 
+    role_hierarchy:
+            ROLE_REPRESENTANTE_LEGAL: [ROLE_USER]
+            ROLE_TRABAJADOR: [ROLE_REPRESENTANTE_LEGAL, ROLE_CREAR_ARCHIVO]
+            ROLE_DIRECTOR: [ROLE_TRABAJADOR, ROLE_CREAR_PROYECTO, ROLE_VER_OTROS_ARCHIVOS]
+            ROLE_ADMIN: [ROLE_DIRECTOR, ROLE_CREAR_CUENTA, ROLE_VER_OTROS_PROYECTOS]
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USER }

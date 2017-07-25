@@ -94,6 +94,13 @@ class Persona implements UserInterface
     private $password;
 
     /**
+     * Many Persona have One Rol.
+     * @ORM\ManyToOne(targetEntity="Rol", inversedBy="personas")
+     * @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
+     */
+    private $rol;
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
@@ -281,6 +288,22 @@ class Persona implements UserInterface
     /**
      * @return mixed
      */
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+    /**
+     * @param mixed $rol
+     */
+    public function setRol($rol)
+    {
+        $this->rol = $rol;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getPlainPassword()
     {
         return $this->plainPassword;
@@ -308,7 +331,7 @@ class Persona implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array($this->rol->getNombreCodigo());
     }
 
     public function eraseCredentials()

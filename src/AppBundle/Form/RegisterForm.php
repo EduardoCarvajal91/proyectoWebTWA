@@ -18,12 +18,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class RegisterForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('rol', EntityType::class, array(
+                'class' => 'AppBundle\Entity\Rol',
+                'choice_label' => 'nombre',
+            ))
             ->add('rut', TextType::class)
             ->add('email', EmailType::class)
             ->add('nombre', TextType::class)

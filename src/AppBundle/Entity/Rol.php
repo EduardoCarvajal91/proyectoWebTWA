@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Rol
@@ -12,6 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Rol
 {
+    /**
+     * One Rol has Many Persona.
+     * @ORM\OneToMany(targetEntity="Persona", mappedBy="rol")
+     */
+    private $personas;
+
+    public function __construct() {
+        $this->personas = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -27,6 +38,13 @@ class Rol
      * @ORM\Column(name="nombre", type="string", length=255, unique=true)
      */
     private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_codigo", type="string", length=255, unique=true)
+     */
+    private $nombreCodigo;
 
 
     /**
@@ -61,6 +79,22 @@ class Rol
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNombreCodigo()
+    {
+        return $this->nombreCodigo;
+    }
+
+    /**
+     * @param string $nombreCodigo
+     */
+    public function setNombreCodigo($nombreCodigo)
+    {
+        $this->nombreCodigo = $nombreCodigo;
     }
 }
 
