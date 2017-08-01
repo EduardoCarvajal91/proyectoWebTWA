@@ -15,12 +15,15 @@ class Proyecto
 {
     /**
      * One Proyecto has Many PersonaProyecto.
-     * @ORM\OneToMany(targetEntity="PersonaProyecto", mappedBy="proyecto")
+     * @ORM\OneToMany(targetEntity="PersonaProyecto", mappedBy="proyecto", cascade={"all"})
      */
     private $personaProyectos;
 
+    private $personas;
+
     public function __construct() {
         $this->personaProyectos = new ArrayCollection();
+        $this->personas = new ArrayCollection();
     }
 
     /**
@@ -134,6 +137,53 @@ class Proyecto
     public function getTermino()
     {
         return $this->termino;
+    }
+
+    // Important
+    /**
+     * Get personas
+     *
+     * @return mixed
+     */
+    public function getPersonas()
+    {
+        $this->personas = new ArrayCollection();
+
+        foreach($this->personaProyectos as $pp)
+        {
+            $this->personas[] = $pp->getPersona();
+        }
+
+        return $this->personas;
+    }
+
+    /**
+     * Set personas
+     *
+     * @param mixed $personas
+     */
+    public function setPersonas($personas)
+    {
+        foreach($personas as $persona)
+        {
+            $personaProyecto = new PersonaProyecto();
+
+            $personaProyecto->setPersona($persona);
+            $personaProyecto->setProyecto($this);
+            $personaProyecto->setRol($persona->getRol());
+
+            $this->addPersonaProyecto($personaProyecto);
+        }
+    }
+
+    /**
+     * Add one PersonaProyecto
+     *
+     * @param mixed $personaProyecto
+     */
+    private function addPersonaProyecto($personaProyecto)
+    {
+        $this->personaProyectos[] = $personaProyecto;
     }
 }
 
