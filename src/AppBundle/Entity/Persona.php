@@ -25,7 +25,6 @@ class Persona implements UserInterface
     private $personaProyectos;
     private $proyectos;
 
-
     public function __construct() {
         $this->personaProyectos = new ArrayCollection();
     }
