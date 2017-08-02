@@ -14,6 +14,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Rol;
 use AppBundle\Entity\Persona;
+use AppBundle\Entity\Estado;
 
 class LoadBaseData implements FixtureInterface
 {
@@ -55,5 +56,19 @@ class LoadBaseData implements FixtureInterface
         $admin->setRol($rolAdmin);
         $manager->persist($admin);
         $manager->flush();
+
+        $estado = new Estado();
+        $estado->setNombre('Borrador');
+        $manager->persist($estado);
+        $manager->flush();
+        $estado = new Estado();
+        $estado->setNombre('Publicado');
+        $manager->persist($estado);
+        $manager->flush();
+        $estado = new Estado();
+        $estado->setNombre('Eliminado');
+        $manager->persist($estado);
+        $manager->flush();
+
     }
 }
