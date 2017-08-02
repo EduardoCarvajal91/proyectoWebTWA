@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{# app/Resources/views/default/proyecto.html.twig #}
+
+{% block body %}
+    {{ proyecto.nombre }}
+    <br/>
+    <div>
+        <ul>
+            {% for persona in personas %}
+                <li>
+                    {{ persona.nombre }} {{ persona.paterno }} {{ persona.materno }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

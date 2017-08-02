@@ -56,6 +56,8 @@ class Proyecto
      */
     private $termino;
 
+    private $slug;
+
 
     /**
      * Get id
@@ -137,6 +139,16 @@ class Proyecto
     public function getTermino()
     {
         return $this->termino;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     // Important
