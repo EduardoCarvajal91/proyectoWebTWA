@@ -3,16 +3,25 @@
 {# app/Resources/views/default/mis_proyectos.html.twig #}
 
 {% block body %}
-    <div>
-    <ul>
-    {% for proyecto in proyectos %}
-        <li>
-        <a href="{{ path('ver_proyecto', {'slug': proyecto.nombre}) }}">
-            {{ proyecto.nombre }}
-        </a>
-        </li>
-    {% endfor %}
-    </ul>
-    </div>
 
+    <div class="container">
+
+        <div>
+            <h1> Lista de Proyectos </h1>
+        </div>
+
+        <div>
+            <ul>
+                {% for proyecto in proyectos %}
+                    <li>
+                        <a href="{{ path('ver_proyecto', {'slug': proyecto.nombre}) }}">
+                        {{ proyecto.nombre }}
+                        </a>
+
+                     </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
 {% endblock %}
