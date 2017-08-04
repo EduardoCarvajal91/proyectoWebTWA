@@ -44,6 +44,13 @@ class PersonaProyecto
     private $rol;
 
     /**
+     * One PersonaProyecto has Many Archivo.
+     * @ORM\OneToMany(targetEntity="Archivo", mappedBy="personaProyecto")
+     */
+    private $archivos;
+
+
+    /**
      * Get id
      *
      * @return int

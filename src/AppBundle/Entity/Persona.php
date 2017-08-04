@@ -20,9 +20,10 @@ class Persona implements UserInterface
 {
     /**
      * One Persona has Many PersonaProyecto.
-     * @ORM\OneToMany(targetEntity="PersonaProyecto", mappedBy="persona")
+     * @ORM\OneToMany(targetEntity="PersonaProyecto", mappedBy="persona", cascade={"all"})
      */
     private $personaProyectos;
+    private $proyectos;
 
     public function __construct() {
         $this->personaProyectos = new ArrayCollection();
@@ -317,6 +318,53 @@ class Persona implements UserInterface
         $this->plainPassword = $plainPassword;
     }
 
+    /**
+     * Get proyectos
+     *
+     * @return mixed
+     */
+    public function getProyectos()
+    {
+        $this->proyectos = new ArrayCollection();
+
+        foreach($this->personaProyectos as $pp)
+        {
+            $this->proyectos[] = $pp->getProyecto();
+        }
+
+        return $this->proyectos;
+    }
+
+    /**
+     * Set proyectos
+     *
+     * @param mixed $proyectos
+     */
+    public function setProyectos($proyectos)
+    {
+        foreach($proyectos as $proyecto)
+        {
+            $personaProyecto = new PersonaProyecto();
+
+            $personaProyecto->setPersona($this);
+            $personaProyecto->setProyecto($proyecto);
+            $personaProyecto->setRol($this->rol);
+
+            $this->addPersonaProyecto($personaProyecto);
+        }
+    }
+
+    /**
+     * Add one PersonaProyecto
+     *
+     * @param mixed $personaProyecto
+     */
+    private function addPersonaProyecto($personaProyecto)
+    {
+        $this->personaProyectos[] = $personaProyecto;
+    }
+
+    //UserInterface implemented methods
     public function getSalt()
     {
         // The bcrypt algorithm doesn't require a separate salt.
