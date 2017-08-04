@@ -5,14 +5,27 @@
 {% block body %}
     {{ proyecto.nombre }}
     <br/>
-    <div>
-        <ul>
-            {% for persona in personas %}
-                <li>
-                    {{ persona.nombre }} {{ persona.paterno }} {{ persona.materno }}
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <ul>
+                {% for persona in personas %}
+                    <li>
+                        {{ persona.nombre }} {{ persona.paterno }} {{ persona.materno }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <br/>
+        <button class="btn btn-primary" type="submit">Añadir archivo</button>
+        {{ form_end(form) }}
+        </div>
     </div>
+
+
 
 {% endblock %}

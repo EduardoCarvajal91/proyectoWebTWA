@@ -69,3 +69,12 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        archivo_proyecto:
+            upload_destination: '%kernel.project_dir%'
+            delete_on_remove: false
+            directory_namer: AppBundle\Service\ArchivoService

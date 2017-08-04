@@ -19,10 +19,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Persona implements UserInterface
 {
     /**
+     * @var ArrayCollection
+     *
      * One Persona has Many PersonaProyecto.
      * @ORM\OneToMany(targetEntity="PersonaProyecto", mappedBy="persona", cascade={"all"})
      */
     private $personaProyectos;
+
+    /**
+     * @var ArrayCollection
+     */
     private $proyectos;
 
     public function __construct() {
@@ -95,6 +101,8 @@ class Persona implements UserInterface
     private $password;
 
     /**
+     * @var Rol
+     *
      * Many Persona have One Rol.
      * @ORM\ManyToOne(targetEntity="Rol", inversedBy="personas")
      * @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
@@ -287,7 +295,7 @@ class Persona implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return Rol
      */
     public function getRol()
     {
@@ -295,7 +303,7 @@ class Persona implements UserInterface
     }
 
     /**
-     * @param mixed $rol
+     * @param Rol $rol
      */
     public function setRol($rol)
     {
@@ -321,7 +329,7 @@ class Persona implements UserInterface
     /**
      * Get proyectos
      *
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getProyectos()
     {
@@ -338,7 +346,7 @@ class Persona implements UserInterface
     /**
      * Set proyectos
      *
-     * @param mixed $proyectos
+     * @param array $proyectos
      */
     public function setProyectos($proyectos)
     {
@@ -357,7 +365,7 @@ class Persona implements UserInterface
     /**
      * Add one PersonaProyecto
      *
-     * @param mixed $personaProyecto
+     * @param PersonaProyecto $personaProyecto
      */
     private function addPersonaProyecto($personaProyecto)
     {

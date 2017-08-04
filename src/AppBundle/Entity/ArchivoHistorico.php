@@ -24,6 +24,8 @@ class ArchivoHistorico
     private $id;
 
     /**
+     * @var Archivo
+     *
      * Many ArchivoHistorico have one Archivo.
      * @ORM\ManyToOne(targetEntity="Archivo", inversedBy="archivoHistoricos")
      * @ORM\JoinColumn(name="archivo_id", referencedColumnName="id")
@@ -31,6 +33,8 @@ class ArchivoHistorico
     private $archivo;
 
     /**
+     * @var Estado
+     *
      * Many ArchivoHistorico have one Estado.
      * @ORM\ManyToOne(targetEntity="Estado")
      * @ORM\JoinColumn(name="estado_id", referencedColumnName="id")
@@ -58,7 +62,7 @@ class ArchivoHistorico
     /**
      * Set archivo
      *
-     * @param string $archivo
+     * @param Archivo $archivo
      *
      * @return ArchivoHistorico
      */
@@ -72,7 +76,7 @@ class ArchivoHistorico
     /**
      * Get archivo
      *
-     * @return string
+     * @return Archivo
      */
     public function getArchivo()
     {
@@ -82,7 +86,7 @@ class ArchivoHistorico
     /**
      * Set estado
      *
-     * @param string $estado
+     * @param Estado $estado
      *
      * @return ArchivoHistorico
      */
@@ -96,7 +100,7 @@ class ArchivoHistorico
     /**
      * Get estado
      *
-     * @return string
+     * @return Estado
      */
     public function getEstado()
     {

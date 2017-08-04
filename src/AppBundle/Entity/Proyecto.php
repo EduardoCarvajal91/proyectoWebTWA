@@ -14,11 +14,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Proyecto
 {
     /**
+     * @var ArrayCollection
+     *
      * One Proyecto has Many PersonaProyecto.
      * @ORM\OneToMany(targetEntity="PersonaProyecto", mappedBy="proyecto", cascade={"all"})
      */
     private $personaProyectos;
 
+    /**
+     * @var ArrayCollection
+     */
     private $personas;
 
     public function __construct() {
@@ -55,9 +60,6 @@ class Proyecto
      * @ORM\Column(name="termino", type="date")
      */
     private $termino;
-
-    private $slug;
-
 
     /**
      * Get id
@@ -141,21 +143,11 @@ class Proyecto
         return $this->termino;
     }
 
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
     // Important
     /**
      * Get personas
      *
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getPersonas()
     {
@@ -172,10 +164,11 @@ class Proyecto
     /**
      * Set personas
      *
-     * @param mixed $personas
+     * @param array $personas
      */
     public function setPersonas($personas)
     {
+        /* @var $persona Persona*/
         foreach($personas as $persona)
         {
             $personaProyecto = new PersonaProyecto();
@@ -191,11 +184,33 @@ class Proyecto
     /**
      * Add one PersonaProyecto
      *
-     * @param mixed $personaProyecto
+     * @param PersonaProyecto $personaProyecto
      */
     private function addPersonaProyecto($personaProyecto)
     {
         $this->personaProyectos[] = $personaProyecto;
+    }
+
+    /**
+     *
+     * @return array()
+     */
+    public function getArchivosProyecto()
+    {
+        $archivos = array();
+        /* @var $pp PersonaProyecto */
+        foreach($this->personaProyectos as $pp)
+        {
+            $archivosPP = $pp->getArchivos();
+
+            /* @var $pp Archivo */
+            foreach($archivosPP as $app)
+            {
+                $archivos[] = $app;
+            }
+        }
+
+        return $archivos;
     }
 }
 

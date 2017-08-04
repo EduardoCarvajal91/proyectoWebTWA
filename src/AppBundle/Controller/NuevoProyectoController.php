@@ -20,7 +20,6 @@ class NuevoProyectoController extends Controller
         $form = $this->createForm(ProyectoForm::class, $proyecto);
 
         $form->handleRequest($request);
-        $personas = array();
         if ($form->isSubmitted() && $form->isValid())
         {
             $personas = $this->getPersonas($form);
@@ -41,10 +40,6 @@ class NuevoProyectoController extends Controller
 
     private function getPersonas($data)
     {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException();
-        }
-
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
         $personas = array();
@@ -73,16 +68,5 @@ class NuevoProyectoController extends Controller
         $trab = $em->findOneBy(array('rut' => $rut));
         if (isset($trab))
             $personas[] = $trab;
-    }
-
-    private function getPersonasForm($form)
-    {
-        $personas = array();
-        for ($i=1; $i<=3; $i++)
-            $personas[] = $form->get('trab'.$i)->getData();
-
-        $personas[] = $form->get('resp_legal')->getData();
-
-        return $personas;
     }
 }

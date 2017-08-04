@@ -35,6 +35,7 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }
         #- { path: ^/mis_proyectos, roles: ROLE_USER }
+        - { path: ^/nuevo_archivo, roles: ROLE_CREAR_ARCHIVO }
         - { path: ^/nuevo_proyecto, roles: ROLE_CREAR_PROYECTO }
         - { path: ^/register, roles: ROLE_ADMIN }
 

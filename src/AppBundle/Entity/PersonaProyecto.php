@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * PersonaProyecto
@@ -23,6 +24,7 @@ class PersonaProyecto
     private $id;
 
     /**
+     * @var Persona
      * Many PersonaProyecto have One Persona.
      * @ORM\ManyToOne(targetEntity="Persona", inversedBy="personaProyectos")
      * @ORM\JoinColumn(name="persona_id", referencedColumnName="id")
@@ -30,6 +32,8 @@ class PersonaProyecto
     private $persona;
 
     /**
+     * @var Proyecto
+     *
      * Many PersonaProyecto have One Proyecto.
      * @ORM\ManyToOne(targetEntity="Proyecto", inversedBy="personaProyectos")
      * @ORM\JoinColumn(name="proyecto_id", referencedColumnName="id")
@@ -37,6 +41,8 @@ class PersonaProyecto
     private $proyecto;
 
     /**
+     * @var Rol
+     *
      * Many PersonaProyecto have One Rol.
      * @ORM\ManyToOne(targetEntity="Rol")
      * @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
@@ -44,10 +50,16 @@ class PersonaProyecto
     private $rol;
 
     /**
+     * @var ArrayCollection
+     *
      * One PersonaProyecto has Many Archivo.
      * @ORM\OneToMany(targetEntity="Archivo", mappedBy="personaProyecto")
      */
     private $archivos;
+
+    public function __construct() {
+        $this->archivos = new ArrayCollection();
+    }
 
 
     /**
@@ -61,7 +73,7 @@ class PersonaProyecto
     }
 
     /**
-     * @return mixed
+     * @return Persona
      */
     public function getPersona()
     {
@@ -69,7 +81,7 @@ class PersonaProyecto
     }
 
     /**
-     * @param mixed $persona
+     * @param Persona $persona
      */
     public function setPersona($persona)
     {
@@ -77,7 +89,7 @@ class PersonaProyecto
     }
 
     /**
-     * @return mixed
+     * @return Proyecto
      */
     public function getProyecto()
     {
@@ -85,7 +97,7 @@ class PersonaProyecto
     }
 
     /**
-     * @param mixed $proyecto
+     * @param Proyecto $proyecto
      */
     public function setProyecto($proyecto)
     {
@@ -93,7 +105,7 @@ class PersonaProyecto
     }
 
     /**
-     * @return mixed
+     * @return Rol
      */
     public function getRol()
     {
@@ -101,11 +113,19 @@ class PersonaProyecto
     }
 
     /**
-     * @param mixed $rol
+     * @param Rol $rol
      */
     public function setRol($rol)
     {
         $this->rol = $rol;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArchivos(): ArrayCollection
+    {
+        return $this->archivos;
     }
 
 

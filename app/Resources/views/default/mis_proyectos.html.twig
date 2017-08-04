@@ -7,7 +7,7 @@
     <ul>
     {% for proyecto in proyectos %}
         <li>
-        <a href="{{ path('ver_proyecto', {'slug': proyecto.nombre}) }}">
+        <a href="{{ path('ver_proyecto', {'nombre': proyecto.nombre}) }}">
             {{ proyecto.nombre }}
         </a>
         </li>
